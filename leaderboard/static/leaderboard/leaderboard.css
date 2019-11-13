@@ -1,0 +1,17 @@
+table, td, th
+{
+    padding: 3px;
+    border: 1px black solid;
+    font-size: large;
+}
+tr:nth-child(2n+0)
+{
+    background-color: cyan;
+}
+tr:nth-child(2n+1)
+{
+    background-color: lime;
+}
+body
+{
+}

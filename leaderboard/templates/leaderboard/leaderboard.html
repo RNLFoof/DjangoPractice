@@ -1,0 +1,47 @@
+{% load static %}
+{% load leaderboard_extras %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'leaderboard/leaderboard.css' %}">
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>User</th>
+        <th>Title</th>
+        <th>Crown</th>
+        <th>Duration</th>
+        <th>Tier</th>
+        <th>Start Date</th>
+    </tr>
+    {% for score in scores %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                {{ score.user }}
+            </td>
+            <td>
+                {{ score.title }}
+            </td>
+            <td>
+                {% with score.emojipath as emoji %}
+                    <img src="{% static emoji %}" alt="Emoji" width="36">
+                {% endwith %}
+            </td>
+            <td>
+                {{ score.duration }}
+            </td>
+            <td>
+                <img src="{% static score.tierpath %}" alt="Emoji" height="36" width="36">
+            </td>
+            <td>
+                {{ score.start_time }}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+<br />
+<a href="{% url 'leaderboard:scoreform' %}">Add a new score</a>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
