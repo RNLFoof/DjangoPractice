@@ -1,0 +1,58 @@
+label, input, select
+{
+    font-size: 2em;
+    vertical-align: middle;
+}
+
+input, select
+{
+    border-radius: 0.3em;
+    background-color: #e0e7eb;
+    margin: 0em 0.1em;
+    border: 0.1em solid black;
+    height: 1.5em;
+    padding: 0 0;
+    flex-grow: 1;
+}
+
+input:focus, select:focus
+{
+    background-color: #ebfaff;
+}
+
+table
+{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0.5em;
+}
+
+input[type=submit]
+{
+    font-size: 3.5em;
+    margin: 0.2em auto;
+    display: block;
+    padding: 0.4em;
+    width: 5em;
+    height: 2em;
+}
+
+th
+{
+    width: 25%;
+}
+
+td
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* For line breaks on errors */
+}
+
+.errorlist
+{
+    width: 100%; /* For line breaks on errors */
+    color: red;
+    font-size: 1.5em;
+}

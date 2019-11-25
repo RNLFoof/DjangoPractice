@@ -1,7 +1,8 @@
 {% load static %}
 {% load leaderboard_extras %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'leaderboard/leaderboard.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'leaderboard/css/reset.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'leaderboard/css/leaderboard.css' %}">
 
 <table>
     <tr>
@@ -15,7 +16,7 @@
     </tr>
     {% for score in scores %}
         <tr>
-            <td>
+            <td class="number square">
                 {{ forloop.counter }}
             </td>
             <td>
@@ -26,14 +27,16 @@
             </td>
             <td>
                 {% with score.emojipath as emoji %}
-                    <img src="{% static emoji %}" alt="Emoji" width="36">
+                    <img src="{% static emoji %}" alt="Emoji">
                 {% endwith %}
             </td>
             <td>
                 {{ score.duration }}
             </td>
-            <td>
-                <img src="{% static score.tierpath %}" alt="Emoji" height="36" width="36">
+            <td class="square">
+                {% if score.tier != "tier0" %}
+                    <img src="{% static score.tierpath %}" alt="Emoji">
+                {% endif %}
             </td>
             <td>
                 {{ score.start_time }}
@@ -42,6 +45,6 @@
     {% endfor %}
 </table>
 <br />
-<a href="{% url 'leaderboard:scoreform' %}">Add a new score</a>
+<a href="{% url 'leaderboard:scoreform' %}" class="new">Add a New Score</a>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}

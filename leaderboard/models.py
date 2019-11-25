@@ -41,6 +41,10 @@ class Score(models.Model):
         return f"leaderboard/emojis/{self.emoji.name.split('/')[-1]}"
     
 class ScoreForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+
     class Meta:
         model = Score
         fields = ["user", "title", "start_time", "duration", "emoji"]

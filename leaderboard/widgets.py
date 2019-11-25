@@ -16,11 +16,13 @@ class DurationSelectorWidget(MultiWidget):
 
     def decompress(self, value):
         if value:
-            if " day, " not in value:
+            if " " not in value:
                 d, x = 0, value
             else:
-                d, x = value.split(" day, ")
-            h, m, s = x.split(":")
+                d, x = value.split(" ")
+            print(x)
+            print(x.split(":"))
+            h, m, s = tuple(x.split(":"))
             return [int(h), int(d), int(m), int(s)]
             # return [value.days, value.seconds // 3600, value.seconds % 3600 // 60, value.seconds % 60]
         return [0, 0, 0, 0]
@@ -31,6 +33,7 @@ class DurationSelectorWidget(MultiWidget):
             l.append(self.widgets[0].value_from_datadict(data, files, f"{name}_{x}"))
 
         # 0, a falsey value, is an actual correct response. so. although an int shouldn't be in here anyway
+        print(l)
         return timedelta(
             days=0 if l[0] in [None,""] else int(l[0]),
             hours=0 if l[1] in [None,""] else int(l[1]),
@@ -40,7 +43,7 @@ class DurationSelectorWidget(MultiWidget):
 
     def render(self, name, value, attrs=None, renderer=None):
         s = ""
-        print(value)
+        value = value or [0, 0, 0, 0]
         for n,w in enumerate(self.widgets):
             wname = f"{name}_{n}"
             wvalue = value[n]
