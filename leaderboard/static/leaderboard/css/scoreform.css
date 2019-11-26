@@ -1,7 +1,7 @@
 label, input, select
 {
     font-size: 2em;
-    vertical-align: middle;
+    margin: auto 0.1em;
 }
 
 input, select
@@ -40,6 +40,7 @@ input[type=submit]
 th
 {
     width: 25%;
+    vertical-align: middle;
 }
 
 td
