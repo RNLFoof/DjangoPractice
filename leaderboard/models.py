@@ -31,6 +31,7 @@ class Score(models.Model):
             return "tier3"
         elif self.duration.seconds >= 60*60*2:
             return "tier2"
+        elif self.duration.seconds >= 60*15:
             return "tier1"
         return "tier0"
 
@@ -39,6 +40,15 @@ class Score(models.Model):
 
     def emojipath(self):
         return f"leaderboard/emojis/{self.emoji.name.split('/')[-1]}"
+
+    # Used to filter out invalid entries from displaying
+    def is_valid(self):
+        try:
+            self.clean_fields()
+        except:
+            return False
+        else:
+            return True
     
 class ScoreForm(ModelForm):
     def __init__(self, *args, **kwargs):

@@ -13,8 +13,11 @@ from leaderboard.models import Score, ScoreForm
 
 
 def leaderboard(request):
-    print(Score.objects.all()[:1].get())
-    return render(request,"leaderboard/leaderboard.html",{"scores":Score.objects.order_by('-duration')})
+    return render(request,"leaderboard/leaderboard.html",{"scores":
+                                                              [x for x in
+                                                               Score.objects.order_by('-duration')
+                                                               if x.is_valid()]}
+                                                          )
 
 def added(request):
     return render(request,"leaderboard/added.html")
