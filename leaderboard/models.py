@@ -1,10 +1,12 @@
 from datetime import timedelta
 
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
 
 # Create your models here.
 from django.forms import ModelForm, SelectDateWidget
+from django.utils.translation import gettext_lazy
 
 from leaderboard.widgets import DurationSelectorWidget
 
@@ -44,11 +46,17 @@ class Score(models.Model):
     # Used to filter out invalid entries from displaying
     def is_valid(self):
         try:
-            self.clean_fields()
-        except:
+            self.full_clean()
+        except ValidationError:
             return False
         else:
             return True
+
+    def clean(self):
+        try:
+            self.emoji.open()
+        except FileNotFoundError:
+            raise ValidationError(gettext_lazy("Emoji file doesn't exist."))
     
 class ScoreForm(ModelForm):
     def __init__(self, *args, **kwargs):
