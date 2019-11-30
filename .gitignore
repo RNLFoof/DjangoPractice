@@ -18,6 +18,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Unnessary personal convenience files
+get over here.bat
+launch.bat
+
 # =========================
 # Operating System Files
 # =========================
